@@ -20,7 +20,7 @@ const avgGrade = tests => {                         // ??? why is this outside t
 const SingleStudent = props => {
   console.log('here are props in SingleStudent', props);
   return (
-    
+
     <div>
       <h3>{props.student.fullName}</h3>
       <h3>Average grade: {avgGrade(props.student.tests)}%</h3>
