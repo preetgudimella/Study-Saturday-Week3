@@ -1,5 +1,12 @@
 
-Main.js
+index.js (final)
+    1) Imported React
+    2) Imported ReactDOM
+    3) Use ReactDOM to render a heading that says 'Hello React!' ???
+    4) Created a components folder in the browser folder
+    5) Created a Main.js file
+
+Main.js (1)
     6) Imported React, React component ({ Component}), Axios
     7) Created a class component called Main
         - Added constructor method: constructor (props)
@@ -14,7 +21,7 @@ Main.js
     9) Created a componentDidMount() method to ensure that the desired info has been obtained before rendering
         - Added this.getStudents()
     10) Added HTML to render() that renders a table of students | w/ one column (student's full name)
-        - Mapped through the students array in this.state of the constructor method
+        - Mapped through the students array found in this.state of the constructor method
           {this.state.students.map(student => {
             return (
               <tr key={student.id}>
@@ -22,39 +29,48 @@ Main.js
               </tr>
             );
           })}
-
     11) Created selectedStudents method
     12) Bound selectedStudents
     13) Added Tests header to render()
     14) Created StudentList.js
-        - Created StudentList presentational component
 
 
-StudentList.js
+StudentList.js (1)
     15) Imported React
-    16) Created StudentList
+    16) Created StudentList presentational component
 
 
-Main.js
-    17) From render() -> Cut everything between <tbody> & </tbody> tags
+Main.js (2)
+    17) From render() -> CUT everything b/w <tbody> & </tbody> tags, including the tags
+        <tbody>
+          {this.state.students.map(student => {
+            return (
+              <tr key={student.id}>
+                <td>{student.fullName}</td>
+              </tr>
+            );
+          })}
+        </tbody>
 
 
-StudentList.js
-    18) From render() of Main.js -> Pasted everything between <tbody> & </tbody> tags
-        {this.state.students.map(student => {                               // Since getStudents has obtained all the student data from the back-end, Mapping t
-        return (
-            <tr key={student.id}>
-            <td>{student.fullName}</td>
-            </tr>
-        );
-        })}
+StudentList.js (2)
+    18) From render() of Main.js -> PASTED everything b/w <tbody> & </tbody> tags, including the tags
+        <tbody>
+          {this.state.students.map(student => {                               // Since getStudents has obtained all the student data from the back-end, Mapping t
+            return (
+              <tr key={student.id}>
+                <td>{student.fullName}</td>
+              </tr>
+            );
+          })}
+        </tbody>
 
 
-Main.js
+Main.js (3)
     19) Added in render() -> <StudentList students={this.state.students} selectStudent={this.selectStudent} />
 
 
-StudentList.js
+StudentList.js (final)
     20) Replaced
         - this.state.students.map(student => {
             w/
@@ -63,12 +79,12 @@ StudentList.js
         - <td onClick= {() => props.selectStudent(student)}>Details</td>
 
 
-SingleStudent.js
-    22) Creatd SingleStudy presentational component
+SingleStudent.js (final)
+    22) Creatd SingleStudent presentational component
     23) Created avgGrade function
 
 
-Main.js
+Main.js (final)
     24) Added in render() -> {this.state.selectedStudent.id ? (<SingleStudent student={this.state.selectedStudent} />) : null}
     25) Imported StudentList
     26) Imported SingleStudent

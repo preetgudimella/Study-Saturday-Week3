@@ -4,10 +4,10 @@
 import React from 'react';
 
 
-
 const StudentList = props => {
   console.log('here are props in StudentList', props);
   return (
+
     <tbody>
       {props.students.map(student => {                                      {/*  Since getStudents has obtained all the student data from the back-end, Mapping t*/}
         return (
@@ -18,12 +18,47 @@ const StudentList = props => {
         );
       })}
     </tbody>
+
   )
 }
 
 
 
 export default StudentList;
+
+
+
+
+
+
+
+
+
+// 2
+
+// import React from 'react';
+
+
+// const StudentList = props => {
+//   console.log('here are props in StudentList', props);
+//   return (
+
+//     <tbody>
+//       {this.state.students.map(student => {                               // Since getStudents has obtained all the student data from the back-end, Mapping t
+//         return (
+//           <tr key={student.id}>
+//             <td>{student.fullName}</td>
+//           </tr>
+//         );
+//       })}
+//     </tbody>
+
+//   )
+// }
+
+
+
+// export default StudentList;
 
 
 
@@ -42,15 +77,7 @@ export default StudentList;
 // const StudentList = props => {
 //   console.log('here are props in StudentList', props);
 //   return (
-//     <tbody>
-//       {props.students.map(student => {                                      {/*  Since getStudents has obtained all the student data from the back-end, Mapping t*/}
-//         return (
-//           <tr key={student.id}>
-//             <td>{student.fullName}</td>
-//           </tr>
-//         );
-//       })}
-//     </tbody>
+
 //   )
 // }
 
