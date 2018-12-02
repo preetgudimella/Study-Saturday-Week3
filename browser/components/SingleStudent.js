@@ -1,9 +1,3 @@
-/*
-
-22) Creatd SingleStudy presentational component
-23) Created avgGrade function
-
-*/
 
 import React from 'react';
 
@@ -21,9 +15,9 @@ const avgGrade = tests => {
 
 
 
-const SingleStudent = (props) => {
+const SingleStudent = props => {
   console.log('here are props in SingleStudent', props);
-  
+
   return (
     <div>
       <h3>{props.student.fullName}</h3>
@@ -51,7 +45,7 @@ const SingleStudent = (props) => {
           </tbody>
 
         </table>
-        
+
       </div>
     </div>
   )
