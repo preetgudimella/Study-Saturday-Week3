@@ -1,5 +1,13 @@
 
-// 2
+// final
+// SingleStudent:
+//    - this.state.selectedStudent.id is referencing the primary id
+//    - <SingleStudent student={this.state.selectedStudent} /> is referncing props.student in SingleStudent in SingleStudent.js
+// StudentList:
+//    - Everything from the return portion of the StudentList child component is being brought in here
+//    - students={this.state.students} - rendering this from Main.js
+//    - selectStudent={this.selectStudent} - rendering <td onClick={() => props.selectStudent(student)}>Details</td> in StudentList, which utilizes the selectStudent method in Main.js
+//    - ??? How do I know to write this code like this? What does it mean? How do I know to put this here?
 
 import React, { Component } from 'react';
 import axios from 'axios';
@@ -15,6 +23,7 @@ class Main extends Component {
       selectedStudent: {}
     };
     this.selectStudent = this.selectStudent.bind(this)
+    this.getStudents = this.getStudents.bind(this)
   }
 
 
@@ -25,16 +34,21 @@ class Main extends Component {
 
 
 
-  async getStudents() {                                                                   // ??? Don't need to bind an axios request function? correct?
-                                                                                          // 1)  router.get('/', function(req, res, next) {
-                                                                                          //     Student.findAll().then(students => res.json(students));                               // Getting all the students
-                                                                                          //   });
-                                                                                          // 2) app.use('/student', Student)
-                                                                                          // 3) Axios.get('/student')
+  async getStudents() {
+                                                                                          // 1)  app.js (required student.js)
+                                                                                              //  app.use('/student', Student)
+                                                                                          // 2) student.js in routes folder
+                                                                                              // router.get('/', function(req, res, next) {
+                                                                                              //   Student.findAll().then(students => res.json(students));                               // Getting all the students
+                                                                                              // });
+                                                                                          // 3) Main.js
+                                                                                              // Axios.get('/student')
     console.log('Fetching all students')
     try {
-      const { data } = await axios.get('/student');                                       // Fetching data
-      this.setState({ students: data });
+      const res = await axios.get('/student');                                       // Fetching data
+      this.setState({
+        students: res.data
+      });
     } catch (err) {
       console.error(err);
     }
@@ -44,7 +58,7 @@ class Main extends Component {
 
   selectStudent(student) {
     return this.setState({
-      selectedStudent: student
+      selectedStudent: student                                                        // student refers to the student that is mapped over in the child component StudentList in StudentList.js
     })
   }
 
@@ -55,14 +69,14 @@ class Main extends Component {
     console.log('This is the state in Main', this.state);
     return (
 
-      <div>                                                                                 {/*  JSX requires that we have a wrapper component ??? tag?  */}
+      <div>                                                                                 {/*  JSX requires that we have a wrapper component - ie tag, container  */}
         <h1>Students</h1>
 
         <table>
 
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Full Name</th>
               <th>Tests</th>
             </tr>
           </thead>
@@ -112,16 +126,21 @@ export default Main;
 
 
 
-//   async getStudents() {                                                                   // ??? Don't need to bind an axios request function? correct?
-//                                                                                           // 1)  router.get('/', function(req, res, next) {
-//                                                                                           //     Student.findAll().then(students => res.json(students));                               // Getting all the students
-//                                                                                           //   });
-//                                                                                           // 2) app.use('/student', Student)
-//                                                                                           // 3) Axios.get('/student')
+//   async getStudents() {
+//                                                                                           // 1)  app.js (required student.js)
+//                                                                                               //  app.use('/student', Student)
+//                                                                                           // 2) student.js in routes folder
+//                                                                                               // router.get('/', function(req, res, next) {
+//                                                                                               //   Student.findAll().then(students => res.json(students));                               // Getting all the students
+//                                                                                               // });
+//                                                                                           // 3) Main.js
+//                                                                                               // Axios.get('/student')
 //     console.log('Fetching all students')
 //     try {
-//       const { data } = await axios.get('/student');                                       // Fetching data
-//       this.setState({ students: data });
+//       const res = await axios.get('/student');                                       // Fetching data
+//       this.setState({
+//         students: res.data
+//       });
 //     } catch (err) {
 //       console.error(err);
 //     }
@@ -142,14 +161,14 @@ export default Main;
 //     console.log('This is the state in Main', this.state);
 //     return (
 
-//       <div>                                                                                 {/*  JSX requires that we have a wrapper component ??? tag?  */}
+//       <div>                                                                                 {/*  JSX requires that we have a wrapper component - ie tag, container  */}
 //         <h1>Students</h1>
 
 //         <table>
 
 //           <thead>
 //             <tr>
-//               <th>Name</th>
+//               <th>Full Name</th>
 //               <th>Tests</th>
 //             </tr>
 //           </thead>
@@ -158,14 +177,13 @@ export default Main;
 
 //         </table>
 
-//         {this.state.selectedStudent.id ? (<SingleStudent student={this.state.selectedStudent} />) : null}
-
 //       </div>
 //     );
 //   }
 // }
 
 // export default Main;
+
 
 
 
@@ -198,16 +216,21 @@ export default Main;
 
 
 
-//   async getStudents() {                                                                   // ??? Don't need to bind an axios request function? correct?
-//                                                                                           // 1)  router.get('/', function(req, res, next) {
-//                                                                                           //     Student.findAll().then(students => res.json(students));                               // Getting all the students
-//                                                                                           //   });
-//                                                                                           // 2) app.use('/student', Student)
-//                                                                                           // 3) Axios.get('/student')
+//   async getStudents() {
+//                                                                                           // 1)  app.js (required student.js)
+//                                                                                               //  app.use('/student', Student)
+//                                                                                           // 2) student.js in routes folder
+//                                                                                               // router.get('/', function(req, res, next) {
+//                                                                                               //   Student.findAll().then(students => res.json(students));                               // Getting all the students
+//                                                                                               // });
+//                                                                                           // 3) Main.js
+//                                                                                               // Axios.get('/student')
 //     console.log('Fetching all students')
 //     try {
-//       const { data } = await axios.get('/student');                                       // Fetching data
-//       this.setState({ students: data });
+//       const res = await axios.get('/student');                                       // Fetching data
+//       this.setState({
+//         students: res.data
+//       });
 //     } catch (err) {
 //       console.error(err);
 //     }
@@ -228,21 +251,19 @@ export default Main;
 //     console.log('This is the state in Main', this.state);
 //     return (
 
-//       <div>                                                                                 {/*  JSX requires that we have a wrapper component ??? tag?  */}
+//       <div>                                                                                 {/*  JSX requires that we have a wrapper component - ie tag, container  */}
 //         <h1>Students</h1>
 
 //         <table>
 
 //           <thead>
 //             <tr>
-//               <th>Name</th>
+//               <th>Full Name</th>
 //               <th>Tests</th>
 //             </tr>
 //           </thead>
 
 //         </table>
-
-//         {this.state.selectedStudent.id ? (<SingleStudent student={this.state.selectedStudent} />) : null}
 
 //       </div>
 //     );
@@ -265,11 +286,14 @@ export default Main;
 // import React, { Component } from 'react';
 // import axios from 'axios';
 
+
+
 // class Main extends Component {
 //   constructor(props) {
 //     super(props);
 //     this.state = {
-//       students: []
+//       students: [],
+//       selectedStudent: {}
 //     };
 //     this.selectStudent = this.selectStudent.bind(this)
 //   }
@@ -282,28 +306,33 @@ export default Main;
 
 
 
-//   async getStudents() {                                                                   // ??? Don't need to bind an axios request function? correct?
-//                                                                                           // 1)  router.get('/', function(req, res, next) {
-//                                                                                           //     Student.findAll().then(students => res.json(students));                               // Getting all the students
-//                                                                                           //   });
-//                                                                                           // 2) app.use('/student', Student)
-//                                                                                           // 3) Axios.get('/student')
+//   async getStudents() {
+//                                                                                           // 1)  app.js (required student.js)
+//                                                                                               //  app.use('/student', Student)
+//                                                                                           // 2) student.js in routes folder
+//                                                                                               // router.get('/', function(req, res, next) {
+//                                                                                               //   Student.findAll().then(students => res.json(students));                               // Getting all the students
+//                                                                                               // });
+//                                                                                           // 3) Main.js
+//                                                                                               // Axios.get('/student')
 //     console.log('Fetching all students')
 //     try {
-//       const { data } = await axios.get('/student');                                       // Fetching data
-//       this.setState({ students: data });
+//       const res = await axios.get('/student');                                       // Fetching data
+//       this.setState({
+//         students: res.data                                                                    // data vs { data } above
+//       })
 //     } catch (err) {
-//       console.error(err);
+//       console.error(err);                                                                 // ??? include next(err)? - no since exclusive to express
 //     }
 //   }
 
 
 
-// selectStudent(student) {
-//   return this.setState({
-//     selectedStudent: student
-//   })
-// }
+//  selectStudent(student) {
+//    return this.setState({
+//      selectedStudent: student
+//    })
+//  }
 
 
 
@@ -311,14 +340,14 @@ export default Main;
 //     console.log('This is the state in Main', this.state);
 //     return (
 
-//       <div>                                                                              {/*  JSX requires that we have a wrapper component ??? tag?  */}
+//       <div>                                                                                 {/*  JSX requires that we have a wrapper component - ie tag, container  */}
 //         <h1>Students</h1>
 
 //         <table>
           
 //           <thead>
 //             <tr>
-//               <th>Name</th>
+//               <th>Full Name</th>
 //               <th>Tests</th>
 //             </tr>
 //           </thead>
@@ -327,7 +356,8 @@ export default Main;
 //             {this.state.students.map(student => {                                        {/*  Since getStudents has obtained all the student data from the back-end, Mapping t*/}
 //               return (
 //                 <tr key={student.id}>
-//                   <td>{student.fullName}</td>
+//                   <td>{student.fullName}</td>                                            {/*  Student model has a fullName property  */}
+//                   <td>Click on Details</td>
 //                 </tr>
 //               );
 //             })}

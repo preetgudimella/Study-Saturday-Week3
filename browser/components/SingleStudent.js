@@ -5,7 +5,9 @@ import React from 'react';
 
 
 
-const avgGrade = tests => {                         // ??? why is this outside the presentational component?
+const avgGrade = tests => {                         // This could be placed in the SingleStudent component, but it's not something that relies on this, so is placed outside
+                                                        // Also, presentational components aren't meant to perform logic
+                                                    // This info for tests is coming from the get route in student.js in the routes folder
   return (
     Math.round(
       tests
@@ -18,7 +20,7 @@ const avgGrade = tests => {                         // ??? why is this outside t
 
 
 const SingleStudent = props => {
-  console.log('here are props in SingleStudent', props);
+  console.log('Here are props in SingleStudent', props);
   return (
 
     <div>
